@@ -49,12 +49,12 @@ int receive(controller* con, FILE *bt){
         fgets(str, 22, bt); //シリアル一行読込
         button(str, con);
         //charからintに型変換
-        con->left_trigger = (int)str[SL2];
-        con->right_trigger = (int)str[SR2];
-        con->left_stick_x = char_to_int(str[SLX]);
-        con->left_stick_y = char_to_int(str[SLY]);
-        con->right_stick_x = char_to_int(str[SRX]);
-        con->right_stick_y = char_to_int(str[SRY]);
-        con->d_pad = (int)str[POV] != 0? 3 * ((int)str[POV] - 1) : -1;
+        con->left_trigger = (int)str[LT];
+        con->right_trigger = (int)str[RT];
+        con->left_stick_x = char_to_int(str[LSX]);
+        con->left_stick_y = char_to_int(str[LSY]);
+        con->right_stick_x = char_to_int(str[RSX]);
+        con->right_stick_y = char_to_int(str[RSY]);
+        con->d_pad = (int)str[DPAD] != 0? 3 * ((int)str[DPAD] - 1) : -1;
     }
 }
