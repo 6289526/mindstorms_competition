@@ -5,14 +5,21 @@
 #include <stdlib.h>
 
 //チーム名の設定
-#define TEAMNAME    "SYAMU GAME" //チーム名
+#define TEAMNAME    "SYAMU GAME"
 
+//モーターポートの設定
+#define A_motor     EV3_PORT_A
+#define B_motor     EV3_PORT_B
+#define Left_motor  EV3_PORT_C
+#define Right_motor EV3_PORT_D
+
+//ここから下はいじらないこと！！
 //ソフトウェアのバージョン
-#define VERSION     "1.5"
+#define VERSION     "2.0"
 
 FILE *bt = NULL;
 
-void config_EV3(void){
+void config_EV3(void) {
     //モーターポートの割当設定
     ev3_motor_config (A_motor, LARGE_MOTOR);
     ev3_motor_config (B_motor, LARGE_MOTOR);
@@ -27,16 +34,15 @@ void config_EV3(void){
     assert(bt != NULL);
 }
 
-void send_teamname(void){
+void send_teamname(void) {
     static int flag = 1;
     if(flag) {
         fprintf(bt, "%s\r\n", TEAMNAME); //チーム名送信
-        //ev3_lcd_fill_rect(0, 12, EV3_LCD_WIDTH, EV3_LCD_HEIGHT, EV3_LCD_WHITE); //画面消去
     }
     flag = 0;
 }
 
-int connect(void){
+int connect(void) {
     while(!ev3_bluetooth_is_connected()) {
         tslp_tsk(100U * 1000U);
         memfile_t memfile;
@@ -63,23 +69,53 @@ int connect(void){
 //メイン関数
 void main_task(intptr_t unused) {
     controller horipad;
-    //変数定義
     config_EV3();
     
     while(1) {
         connect();        
         receive(&horipad, bt);
         //ここから上はイジらないこと
-
+        //ボタンの値描画
         lcd_xy button = {38, 20};
         button_draw(button, horipad);
+        //スティックの値描画
         lcd_xy stick = {0, 70};
         stick_draw(stick, horipad);
-        if(horipad.button[TRIANGLE]){
+
+        //ボタンの動作
+        if(horipad.button[TRIANGLE]) {
+            //△のとき
             ev3_motor_set_power(A_motor, 50);
         }
-        else{
+        else {
             ev3_motor_stop(A_motor, true);
         }
+
+        //スティックの動作
+        //ノーマルモード
+        if(horipad.d_pad == 90) {
+            ev3_motor_set_power(Left_motor, -50);
+            ev3_motor_set_power(Right_motor, 50);
+        }
+        else if(horipad.d_pad == 270) {
+            ev3_motor_set_power(Left_motor, 50);
+            ev3_motor_set_power(Right_motor, -50);
+        }
+        else {
+            ev3_motor_steer(Left_motor, Right_motor, horipad.left_stick_y / 2, horipad.right_stick_x);
+        }
+
+        //タンクモード
+        //ev3_motor_set_power(Left_motor, horipad.left_stick_y);
+        //ev3_motor_set_power(Right_motor, horipad.right_stick_y);
+
+        //ラジコンモード
+        //ev3_motor_steer(Left_motor, Right_motor, horipad.left_stick_y, horipad.right_stick_x);
+
+        //グランツーリスモモード
+        //ev3_motor_steer(Left_motor, Right_motor, horipad.right_stick_y, horipad.left_stick_x);
+
+        //ニードフォースピードモード
+        //(horipad.right_trigger != 0)? ev3_motor_steer(Left_motor, Right_motor, horipad.right_trigger, horipad.left_stick_x) : ev3_motor_steer(Left_motor, Right_motor, -horipad.left_trigger, horipad.left_stick_x)
     }
 }

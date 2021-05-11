@@ -1,16 +1,13 @@
 #include "app.h"
-//#include "tokudaiEV3.h"
-//FILE *bt = NULL;
-//char str[25]; //シリアル受信変数
 
 //ボタン押下判定関数
 void button(char *str, controller* con) {
-    for (int i=0; i < buttonnum; i++){
+    for (int i=0; i < buttonnum; i++) {
         con->button[i] = str[i] - '0';
     }
 }
 
-int char_to_int(char s){
+int char_to_int(char s) {
     return 2 * ((int)s - 50);
 }
 
@@ -38,17 +35,17 @@ void stick_draw(lcd_xy plot, controller con) {
     ev3_lcd_draw_string(s, 0, 35); //十字キーの値描画
 }
 
- //チーム名の描画
-void teamname_draw(lcd_xy plot, char* teamname){
+//チーム名の描画
+void teamname_draw(lcd_xy plot, char* teamname) {
     ev3_lcd_draw_string("MadeBy", plot.x, plot.y);
     ev3_lcd_draw_string(teamname, plot.x + 65, plot.y);
 }
 
+//シリアル受信と値の割当
 int receive(controller* con, FILE *bt){
     //シリアル通信
     char str[25];
     if(fgetc(bt) == 'b') {
-        //ev3_lcd_fill_rect(0, 12, EV3_LCD_WIDTH, EV3_LCD_HEIGHT, EV3_LCD_WHITE); //画面消去
         fgets(str, 22, bt); //シリアル一行読込
         button(str, con);
         //charからintに型変換
@@ -59,8 +56,5 @@ int receive(controller* con, FILE *bt){
         con->right_stick_x = char_to_int(str[SRX]);
         con->right_stick_y = char_to_int(str[SRY]);
         con->d_pad = (int)str[POV] != 0? 3 * ((int)str[POV] - 1) : -1;
-        //char s[20];
-        //ここから上はイジらないこと！！
     }
-
 }
