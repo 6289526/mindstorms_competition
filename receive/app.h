@@ -1,15 +1,17 @@
+//イジらないこと！！
+
 #include "target_test.h"
 #include "ev3api.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 #ifndef STACK_SIZE
-#define	STACK_SIZE	4096 //タスクのスタックサイズ
+#define	STACK_SIZE	512810 //タスクのスタックサイズ(ｺｲﾆﾊｯﾃﾝ)
 #endif //STACK_SIZE
 
 #ifndef TOPPERS_MACRO_ONLY
 
-extern void	task(intptr_t exinf);
+//xtern void	task(intptr_t exinf);
 extern void	main_task(intptr_t exinf);
 
 #endif
@@ -64,8 +66,8 @@ typedef struct lcd_xy {
     int y;
 } lcd_xy;
 
-static void button(char *str, controller* con);         //ボタン押下判定関数
-static int char_to_int(char s);                         //型変換関数
+void button(char *str, controller* con);         //ボタン押下判定関数
+int char_to_int(char s);                         //型変換関数
 extern void button_draw(lcd_xy plot, controller con);   //ボタン値LCD描画関数
 extern void stick_draw(lcd_xy plot, controller con);    //スティック値LCD描画関数
 extern void teamname_draw(lcd_xy plot, char* teamname); //チームネームLCD描画関数

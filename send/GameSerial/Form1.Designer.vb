@@ -44,7 +44,6 @@ Partial Class EV3
         'Controller
         '
         Me.Controller.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Controller.ErrorImage = Global.GameSerial.My.Resources.Resources.a960x540l
         Me.Controller.Image = Global.GameSerial.My.Resources.Resources.Red
         Me.Controller.InitialImage = Global.GameSerial.My.Resources.Resources.Red
         Me.Controller.Location = New System.Drawing.Point(0, 0)

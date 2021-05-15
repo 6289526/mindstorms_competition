@@ -22,11 +22,6 @@ GameSerial
   現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
 </summary>
 </member>
-<member name="P:GameSerial.My.Resources.Resources.a960x540l">
-<summary>
-  型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
-</summary>
-</member>
 <member name="P:GameSerial.My.Resources.Resources.Black">
 <summary>
   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。

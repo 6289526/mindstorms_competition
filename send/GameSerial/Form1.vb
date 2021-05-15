@@ -1,42 +1,4 @@
-﻿'                                              ```                                                   
-'                                              sy/                                                   
-'                    L2 6                      hhy-                  R2 7                                
-'                    L1 4                     ohhh/                  R1 5
-'                     `.:/:                   yhhho                  `//-.                           
-'               `-:+oyhhhhdyyo:`             `+hhy/              -sy+oyhdddys+:.`                    
-'           -+syhhhdddddddhh/--\:::::::::::::+dhhdh:::::::::::/sd/--\sssssyhhdddhs+`                
-'          .hdddmmddhyysssss|  |yddddddhhhhhhddddddhhhhhhhhhhhddh|  |hhhhyyysssssyhhs
-'        .dmmdhyo+/// +++oyh|SH|hdhhhhhhhhhhhddhhddhdddddddddddmh|OP|dhhhhdddhhhhyyys +`              
-'        `hmdso++/+//+++ooyd|09|dNmmmmmmmmmmm      mmmmmmmmmmmmNh|09|dhhhhd/----\ddddss/              
-'        smmyo+++ossssssyyys\--/dmmmmmmmmmmmm  PD  mmmmmmmmmmmmNNh\--/yyhhdh| △ |dddyss:              
-'       +mmdsoshmmmmmmmdyyyyyhhhdmmmmmmmmmmmm  13  mmmmmmmmmmmmNhhhhhhhhhdd| TR |dddddsss.            
-'      -mmmyshmNm  +y mNdyhhhhhdNmmmmmmmmmmmm      mmmmmmmmmmNNNhhhhd/----\| 03 |/----\so`           
-'      hmmdshmNm   ↑   mNhyhhhhdmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmNhhddy| □ |\----/| 02 |yys/           
-'     mmmysdmN -x←10→+x NyhhhhdmmmmmmmmmmmNmmmNmmmNmmmNNmmNNNdhddsh| SQ |dddddm| CI |dyys.
-'    `hmmdyshhNNm  ↓   Nhhhhhhhmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmhhhdd| 00 |dddddd| ○ |dhyy+          
-'    mmmdyyyyydNNm -y Nmhyhhhhhhhhhhhyyysydddhhhhddddyyyyyhhhhhhhhhdd\----//----\\----/hhhs.
-'    ommmdhyyyyyyhddddhyyhhhhhhmmddmdhhhhhmddmdhhhmddmdddhhdmmmdhmmdhddddmh| 01 |ddddddhhhy
-'   .ymmmddhyysyyyyyyyhhhhhhhhhNdddmmhhhhhddddhhhhddmddhdmNNm     Nmhdddddd| CR |ddddddhddh+`        
-'   /hmmmdddhyyyyyyyyhhhhhhmdddmddddmddddhhhdhhhdddddddhNNmm   ↑  NNmhdddd| ☓ |dddddddddhs-        
-'  `ohmmmmdddhyyyyyyyhhhhhdmddddddhhhhhhNhhhhh/----\mdddddNN ←11→  Nddddd\----/dddddddddhs/        
-'  -shmmmmdddddhhyyyhhhhhhdmmmmmdhhhddddmhhhhd| PS |ddddmNmmm  ↓  NNyhdddddddddddddddddddhyo`       
-'  /ydmmmmmmdddddddhhhhhhhhddddNdhhdmddddhhhhh| 12 |dddhyhNmmN    NNhyddddddddddddddddddddys-       
-' `oydmmmmmmmmdddddddddddddddddNdddmmhhhhyyssh\----/dydddyyhddmmddhyhddddddddddddddddddddddhs/       
-' .shdmmmmmmmmmddddddddddddhhhhhhhhyyssssssssoooosoosssssssoo+ooosyhhddddddddddddddddddddddhy +`      
-' -shdmmmmmmmmmmmmddddhhyyssoo++//:--....```````````````...--://+oossyyyhdddmmmmddddddmdddhyo.      
-' /yhdmmmmmmmmmmddddhyyssoo+//:-.``                           ``.-:/++ossyyhhddddddddmdddddhys-      
-' +yhdmmmmmmmmdddhhhyysso+/:-.`                                   `.-/+oosyyyhhhdddddddddddhys:      
-' +yhddddmmdddhhhhyyysso+/-`       v min mid max                    `.-/+ossyyhhhhhdddddddhhys/      
-'`oyhhddddddhhhhhyyyso+/-`         x   0  50 100                       .:+osyyyyhhhhhhdddhhhys/      
-'`+yyhhhhhhhhhhyyyyso+:.           y   0  50 100                         -/ossyyyyhhhhhhhhhhys/      
-'`+yyhhhhhhhhyyyyyso+-`            z   0  50 100                          `:+ssyyyyyhhhhhhhhys/      
-' +syyyyhyyyyyyyyso/.                                                       -+osyyyyyyyhhhyyys      
-' osyyyyyyyyysso+: `                                                         ./ossyyyyyyyyyyso-      
-' `+osyyyysssso+:.                                                             ./oosssyyyysso/`      
-'  .: +oooooo+/-.                                                                 .:/+oooooo+:`       
-'    `..--..`                                                                       `......`         
-
-Imports SlimDX.DirectInput
+﻿Imports SlimDX.DirectInput
 Imports System.IO.Ports
 
 Public Class EV3
@@ -148,7 +110,7 @@ Public Class EV3
 
     Delegate Sub AddText(ByVal Text As String)
     Private Sub SerialPort1_DataReceived(sender As Object, e As SerialDataReceivedEventArgs) Handles SerialPort.DataReceived
-        Dim unused1 = ConsoleBox.Invoke(New AddText(AddressOf ConsoleBox.AppendText), SerialPort.ReadLine + " のロボットに接続しました。")
+        Dim unused1 = ConsoleBox.Invoke(New AddText(AddressOf ConsoleBox.AppendText), SerialPort.ReadLine + " のロボットに接続しました。" + vbCrLf)
     End Sub
 
     Private Sub Debug_Send(sendStr As String)
